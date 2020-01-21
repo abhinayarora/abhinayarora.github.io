@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <title>Adding a Marker</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+    </style>
+  </head>
+  <body>
+    <!-- div element for the map -->
+    <div id="map"></div>
+
+    <script>
+    // Initialize and add the map
+    var marker; 
+    var Loc = {lat: 48.8594, lng: 2.2945};
+    var MLoc = {lat: 48.86104, lng: 2.29447};
+    function initMap() 
+    {
+     var map = new google.maps.Map(document.getElementById('map'), {
+        center: Loc,
+        zoom: 18,
+        tilt: 45,
+        minZoom:18,
+        mapTypeId: 'satellite',
+        rotateControl: false,
+        mapTypeControl: true,
+        mapTypeControlOptions: {
+          mapTypeIds: ['satellite', 'terrain']}
+        });
+    // var info= new googel.maps.InfoWindow({content: 'The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France. It is named after the engineer Gustave Eiffel, whose company designed and built the tower.'})  
+    // google.maps.event.addListener(marker,'click',function(){info.open(map,marker);})   
+     marker = new google.maps.Marker({
+      map: map,
+      draggable: true,
+      animation: google.maps.Animation.DROP,
+      position:MLoc});
+     marker.addListener('click', toggleBounce);
+    }
+
+function toggleBounce() {
+if (marker.getAnimation() !== null) {
+  marker.setAnimation(null);
+} else {
+  marker.setAnimation(google.maps.Animation.BOUNCE);
+       }
+}   
+</script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACW2AQ2y3IHnoc8gWVpg781RgytjGLGOg&callback=initMap"
+    async defer></script>
+  </body>
+</html>

@@ -1,4 +1,3 @@
-
 <html>
   <head>
     <style>
@@ -21,8 +20,8 @@
       var map;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: {lat: 20.5937, lng: 78.9629},
+          zoom: 3,
+          center: {lat: 20.5937, lng: 78.962},
           mapTypeId: 'satellite'
         });
 
@@ -34,31 +33,24 @@
         script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
         document.getElementsByTagName('head')[0].appendChild(script);
 
-        map.data.setStyle(function(feature) {
-          var magnitude = feature.getProperty('mag');
-          return {
-            icon: getCircle(magnitude)
-          };
-        });
-      }
-
-      function getCircle(magnitude) {
-        return {
-          path: google.maps.SymbolPath.CIRCLE,
-          fillColor: 'white',
-          fillOpacity: .05,
-          scale: Math.pow(2, magnitude) / 2,
-          strokeColor: 'yellow',
-          strokeWeight: .5
-        };
       }
 
       function eqfeed_callback(results) {
-        map.data.addGeoJson(results);
+        var heatmapData = [];
+        for (var i = 0; i < results.features.length; i++) {
+          var coords = results.features[i].geometry.coordinates;
+          var latLng = new google.maps.LatLng(coords[1], coords[0]);
+          heatmapData.push(latLng);
+        }
+        var heatmap = new google.maps.visualization.HeatmapLayer({
+          data: heatmapData,
+          dissipating: false,
+          map: map
+        });
       }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACW2AQ2y3IHnoc8gWVpg781RgytjGLGOg&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACW2AQ2y3IHnoc8gWVpg781RgytjGLGOg&libraries=visualization&callback=initMap">
     </script>
   </body>
 </html>

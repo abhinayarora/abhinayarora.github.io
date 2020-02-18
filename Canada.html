@@ -51,7 +51,7 @@
       "esri/Map",
        "esri/views/SceneView",
        "esri/layers/FeatureLayer"
-    ], function(Map,SceneView) {
+    ], function(Map,SceneView,FeatureLayer) {
 
          map1 = new Map({basemap: "topo-vector"});
         map2= new Map({basemap:"satellite"});
@@ -67,7 +67,7 @@
         url: "https://luna.flemingcollege.ca/arcgis/rest/services/Geom99/AbarorCanadaPro/MapServer/0?token=TZJ1W8JnFbGQzfEElqafeOHw0lk3CVzjZbGyX0XqMz7dXh98ek8u1b6w3C4g3lLtvcYGqDor43dTRUybcODkZ5tznMWoYnSJhmlyh33I_Fc."
       });
 
-      map.add(canadaLayer);
+      scene.map.add(canadaLayer,0);
     });
     
     document.getElementById("satellite").addEventListener("click",
@@ -97,3 +97,5 @@
     //     },
     //     tilt: 45  // perspective in degrees
     //   }
+
+

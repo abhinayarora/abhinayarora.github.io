@@ -19,6 +19,14 @@
         z-index: 1;
         text-align: center;
       }
+      #province {
+        position: absolute;
+        bottom: 17px;
+        width: 100%;
+        padding: 20px 0;
+        z-index: 1;
+        text-align: center;
+      }
     button {
         background: white;
         padding: 7px;
@@ -44,6 +52,19 @@
     <button id='topo'>Topo-Vector</button> 
 </div>
     <div id="sceneview"></div>
+    <div id="province">
+      <button id='alberta'>Alberta</button>
+      <button id='bc'>British Columbia</button>
+      <button id='new'>New Brunswick</button>
+      <button id='nnl'>Newfoundland and Labrador</button>
+      <button id='ns'>Nova Scotia</button>
+      <button id='on'>Ontario</button>
+      <button id='pei'>Prince Edward Island</button>
+      <button id='qb'>Quebec</button>
+      <button id='skw'>Saskatchewan</button>
+      <button id='terr'>Territories</button>
+
+    </div>
   </body>
   <script>
       var map1,map2,scene;
@@ -59,31 +80,42 @@
        scene = new SceneView({
       container: "sceneview",
       map: map1,
-      center: [-95.71511,55.09042],
-      zoom: 3
+      center: [-103.71511,65.09042],
+      zoom: 3.26
+
     });
     // Canada feature layer (polygon) from service directory.
     var canadaLayer = new FeatureLayer({
-        url: "https://luna.flemingcollege.ca/arcgis/rest/services/Geom99/AbarorCanadaPro/MapServer/0?token=TZJ1W8JnFbGQzfEElqafeOHw0lk3CVzjZbGyX0XqMz7dXh98ek8u1b6w3C4g3lLtvcYGqDor43dTRUybcODkZ5tznMWoYnSJhmlyh33I_Fc."
-      });
-
-      scene.map.add(canadaLayer,0);
+        url: "https://luna.flemingcollege.ca/arcgis/rest/services/Geom99/AbarorCanadaPro/MapServer/0",
+        renderer: {
+          type: "simple",
+          symbol: {
+            type: "simple-line",
+            color: "Grey",
+            width: "2px"
+          }
+        }
+       });
+       scene.map.add(canadaLayer,0);
+      
     });
     
     document.getElementById("satellite").addEventListener("click",
     function()
     {
       scene.map=map2,
-      scene.center= [-95.71511,55.09042],
-      scene.zoom= 3
+      scene.center= [-103.71511,65.09042],
+      scene.zoom= 3.26,
+      scene.map.add(canadaLayer,0);
     })
 
     document.getElementById("topo").addEventListener("click",
     function()
     {
       scene.map=map1,
-      scene.center= [-95.71511,55.09042],
-      scene.zoom=3
+      scene.center= [-103.71511,65.09042],
+      scene.zoom=3.26,
+      scene.map.add(canadaLayer,0);
     })
   </script>  
 </html>
@@ -97,5 +129,3 @@
     //     },
     //     tilt: 45  // perspective in degrees
     //   }
-
-

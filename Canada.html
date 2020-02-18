@@ -1,3 +1,6 @@
+<!-- Created by Abhinay Arora -->
+<!-- Js Api Arcgis -->
+<!-- 17-Feb-2020 -->
 <html>
 <head>
   <meta charset="utf-8">
@@ -21,11 +24,20 @@
       }
       #province {
         position: absolute;
-        bottom: 17px;
+        bottom: 10px;
         width: 100%;
-        padding: 20px 0;
+        padding: 10px 0;
         z-index: 1;
         text-align: center;
+      }
+      #map{
+        position: absolute;
+        bottom: 25px;
+        width: 100%;
+        padding: 50px 0;
+        /* z-index: 0; */
+        text-align: center;
+
       }
     button {
         background: white;
@@ -53,8 +65,9 @@
 </div>
     <div id="sceneview"></div>
     <div id="province">
-      <button id='alberta'>Alberta</button>
+      <button id='alb'>Alberta</button>
       <button id='bc'>British Columbia</button>
+      <button id='mt'>Manitoba</button>
       <button id='new'>New Brunswick</button>
       <button id='nnl'>Newfoundland and Labrador</button>
       <button id='ns'>Nova Scotia</button>
@@ -63,11 +76,11 @@
       <button id='qb'>Quebec</button>
       <button id='skw'>Saskatchewan</button>
       <button id='terr'>Territories</button>
-
     </div>
+    <div id="map"><button id="canadabtn">Map Of Canada</button></div>
   </body>
   <script>
-      var map1,map2,scene;
+      var map1,map2,scene,canadaLayer;
     require([
       "esri/Map",
        "esri/views/SceneView",
@@ -85,21 +98,280 @@
 
     });
     // Canada feature layer (polygon) from service directory.
-    var canadaLayer = new FeatureLayer({
+     canadaLayer = new FeatureLayer({
         url: "https://luna.flemingcollege.ca/arcgis/rest/services/Geom99/AbarorCanadaPro/MapServer/0",
         renderer: {
           type: "simple",
           symbol: {
             type: "simple-line",
-            color: "Grey",
-            width: "2px"
+            color: "black",
+            width: "3px",
+            opacity:0.6
           }
         }
        });
        scene.map.add(canadaLayer,0);
       
     });
-    
+    // function defined for bounce movement;
+    // function customEasing(t) {
+    //       return (
+    //         1 -
+    //         Math.abs(Math.sin(-1.7 + t * 4.5 * Math.PI)) * Math.pow(0.5, t * 10)
+    //       );
+    //     }
+    document.getElementById("canadabtn").addEventListener("click",
+    function()
+    {   scene.goTo(
+              {
+                position: {
+                  x: -103.71511,
+                  y: 65.09042,
+                  z: 70000000,
+                  
+                },
+                heading: 0,
+                tilt: 0
+              },
+              {
+                speedFactor: 0.3,
+                // easing: customEasing
+              }
+            );
+            canadaLayer.definitionExpression="1=1"
+      scene.map.add(canadaLayer,0);
+    })
+    document.getElementById("alb").addEventListener("click",
+    function()
+    {   scene.goTo(
+              {
+                position: {
+                  x: -116.5765,
+                  y: 53.9333,
+                  z: 5000000,
+                  
+                },
+                heading: 0,
+                tilt: 0
+              },
+              {
+                speedFactor: 0.3,
+                // easing: customEasing
+              }
+            );
+      canadaLayer.definitionExpression="PRENAME like 'Alberta'"
+      scene.map.add(canadaLayer,0);
+    })
+    document.getElementById("bc").addEventListener("click",
+    function()
+    {   scene.goTo(
+              {
+                position: {
+                  x: -127.6476,
+                  y: 53.7267,
+                  z: 5000000,
+                  
+                },
+                heading: 0,
+                tilt: 0
+              },
+              {
+                speedFactor: 0.3,
+                // easing: customEasing
+              }
+            );
+      canadaLayer.definitionExpression="PRENAME like 'British Columbia'"
+      scene.map.add(canadaLayer,0);
+    })
+    document.getElementById("mt").addEventListener("click",
+    function()
+    {   scene.goTo(
+              {
+                position: {
+                  x: -98.8139,
+                  y: 53.7609,
+                  z: 5500000,
+                  
+                },
+                heading: 0,
+                tilt: 0
+              },
+              {
+                speedFactor: 0.3,
+                // easing: customEasing
+              }
+            );
+      canadaLayer.definitionExpression="PRENAME like 'Manitoba'"
+      scene.map.add(canadaLayer,0);
+    })
+    document.getElementById("new").addEventListener("click",
+    function()
+    {   scene.goTo(
+              {
+                position: {
+                  x: -66.4619,
+                  y: 46.5653,
+                  z: 3000000,
+                  
+                },
+                heading: 0,
+                tilt: 0
+              },
+              {
+                speedFactor: 0.3,
+                // easing: customEasing
+              }
+            );
+      canadaLayer.definitionExpression="PRENAME like 'New Brunswick'"
+      scene.map.add(canadaLayer,0);
+    })
+    document.getElementById("nnl").addEventListener("click",
+    function()
+    {   scene.goTo(
+              {
+                position: {
+                  x: -57.6604,
+                  y: 53.1355,
+                  z: 3000000,
+                  
+                },
+                heading: 0,
+                tilt: 0
+              },
+              {
+                speedFactor: 0.3,
+                // easing: customEasing
+              }
+            );
+      canadaLayer.definitionExpression="PRENAME like 'Newfoundland and Labrador'"
+      scene.map.add(canadaLayer,0);
+    })
+    document.getElementById("ns").addEventListener("click",
+    function()
+    {   scene.goTo(
+              {
+                position: {
+                  x: -63.7443,
+                  y: 44.6820,
+                  z: 3000000,
+                  
+                },
+                heading: 0,
+                tilt: 0
+              },
+              {
+                speedFactor: 0.3,
+                // easing: customEasing
+              }
+            );
+      canadaLayer.definitionExpression="PRENAME like 'Nova Scotia'"
+      scene.map.add(canadaLayer,0);
+    })
+    document.getElementById("on").addEventListener("click",
+    function()
+    {   scene.goTo(
+              {
+                position: {
+                  x: -85.3232,
+                  y: 51.2538,
+                  z: 7000000,
+                  
+                },
+                heading: 0,
+                tilt: 0
+              },
+              {
+                speedFactor: 0.3,
+                // easing: customEasing
+              }
+            );
+      canadaLayer.definitionExpression="PRENAME like 'Ontario'"
+      scene.map.add(canadaLayer,0);
+    })
+    document.getElementById("pei").addEventListener("click",
+    function()
+    {   scene.goTo(
+              {
+                position: {
+                  x: -63.4168,
+                  y: 46.5107,
+                  z: 1500000,
+                  
+                },
+                heading: 0,
+                tilt: 0
+              },
+              {
+                speedFactor: 0.3,
+                // easing: customEasing
+              }
+            );
+      canadaLayer.definitionExpression="PRENAME like 'Prince Edward Island'"
+      scene.map.add(canadaLayer,0);
+    })
+    document.getElementById("qb").addEventListener("click",
+    function()
+    {   scene.goTo(
+              {
+                position: {
+                  x: -71.2080,
+                  y: 46.8139,
+                  z: 7000000,
+                  
+                },
+                heading: 0,
+                tilt: 0
+              },
+              {
+                speedFactor: 0.3,
+                // easing: customEasing
+              }
+            );
+      canadaLayer.definitionExpression="PRENAME like 'Quebec'"
+      scene.map.add(canadaLayer,0);
+    })
+    document.getElementById("skw").addEventListener("click",
+    function()
+    {   scene.goTo(
+              {
+                position: {
+                  x: -106.4509,
+                  y: 58.9399,
+                  z: 5000000,
+                  
+                },
+                heading: 0,
+                tilt: 0
+              },
+              {
+                speedFactor: 0.3,
+                // easing: customEasing
+              }
+            );
+      canadaLayer.definitionExpression="PRENAME like 'Saskatchewan'"
+      scene.map.add(canadaLayer,0);
+    })
+    document.getElementById("terr").addEventListener("click",
+    function()
+    {   scene.goTo(
+              {
+                position: {
+                  x: -112.1833,
+                  y: 70.2667,
+                  z: 7500000,
+                  
+                },
+                heading: 0,
+                tilt: 0
+              },
+              {
+                speedFactor: 0.3,
+                // easing: customEasing
+              }
+            );
+      canadaLayer.definitionExpression="PRENAME like 'Nunavut' or PRENAME like 'Yukon' or PRENAME like 'Northwest Territories'"
+      scene.map.add(canadaLayer,0);
+    })
     document.getElementById("satellite").addEventListener("click",
     function()
     {
@@ -121,11 +393,3 @@
 </html>
 
 
-//   camera: {
-    //     position: {  // observation point
-    //       x: -95.80800,
-    //       y: 65.96100,
-    //       z: 10 // altitude in meters
-    //     },
-    //     tilt: 45  // perspective in degrees
-    //   }

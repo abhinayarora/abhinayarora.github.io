@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>Add GeoJSON from ArcGIS Server</title>
+<title>MapBox n GeoJson</title>
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
 <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
@@ -22,7 +22,7 @@
         zoom: 3,
         center: [-100.0, 50.0]
     });
-    var url = 'https://geosavy.duckdns.org/arcgis/rest/services/MyServices/CanadaOnAWS/MapServer/0/query?where=1%3D1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&having=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&historicMoment=&returnDistinctValues=false&resultOffset=&resultRecordCount=&queryByDistance=&returnExtentOnly=false&datumTransformation=&parameterValues=&rangeValues=&quantizationParameters=&featureEncoding=esriDefault&f=geojson';
+    var url = 'https://geosavy.duckdns.org/arcgis/rest/services/MyServices/CanadaOnAWS/MapServer/0/query?where=PRNAME+like+%27Ontario%27+or+PRNAME+like+%27Alberta%27+or+PRNAME+like+%27Manitoba%27&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&having=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&historicMoment=&returnDistinctValues=false&resultOffset=&resultRecordCount=&queryByDistance=&returnExtentOnly=false&datumTransformation=&parameterValues=&rangeValues=&quantizationParameters=&featureEncoding=esriDefault&f=geojson';
     map.on('load', function() {
         window.setInterval(function() {
             map.getSource('canada').setData(url);
@@ -31,7 +31,7 @@
         map.addSource('canada', { type: 'geojson', data: url });
        
 	map.loadImage(
-'https://geosavy.duckdns.org/arcgis/rest/services/MyServices/CanadaOnAWS/MapServer/export?bbox={bbox-epsg-3857}&bboxSR=102100&layers=show%3A0&layerDefs=&size=256%2C256&imageSR=102100&historicMoment=&format=png32&transparent=true&dpi=96&time=&layerTimeOptions=&dynamicLayers=&gdbVersion=&mapScale=&rotation=&datumTransformations=&layerParameterValues=&mapRangeValues=&layerRangeValues=&f=image',
+'https://f0.pngfuel.com/png/164/786/planet-earth-artwork-png-clip-art-thumbnail.png',
 function(err, image) {
 // Throw an error if something went wrong
 if (err) throw err;

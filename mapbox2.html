@@ -22,20 +22,26 @@
         zoom: 3,
         center: [-100.0, 50.0]
     });
-    var url = 'https://geosavy.duckdns.org/arcgis/rest/services/MyServices/CanadaOnAWS/MapServer/0/query?where=PRNAME%3D%27Ontario%27+or+PRNAME%3D%27ALBERTA%27+or+PRNAME+%3D+%27Quebec%27&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&having=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&historicMoment=&returnDistinctValues=false&resultOffset=&resultRecordCount=&queryByDistance=&returnExtentOnly=false&datumTransformation=&parameterValues=&rangeValues=&quantizationParameters=&featureEncoding=esriDefault&f=geojson';
+    var url = 'https://geosavy.duckdns.org/arcgis/rest/services/MyServices/CanadaOnAWS/MapServer/0/query?where=PRNAME%3D%27Ontario%27&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&having=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&historicMoment=&returnDistinctValues=false&resultOffset=&resultRecordCount=&queryByDistance=&returnExtentOnly=false&datumTransformation=&parameterValues=&rangeValues=&quantizationParameters=&featureEncoding=esriDefault&f=geojson';
     map.on('load', function() {
         window.setInterval(function() {
             map.getSource('canada').setData(url);
         }, 2000);
 
         map.addSource('canada', { type: 'geojson', data: url });
-        map.addLayer({
+       map.loadImage(
+'https://geosavy.duckdns.org/arcgis/rest/services/MyServices/CanadaOnAWS/MapServer/export?bbox={bbox-epsg-3857}&bboxSR=102100&layers=show%3A0&layerDefs=&size=256%2C256&imageSR=102100&historicMoment=&format=png32&transparent=true&dpi=96&time=&layerTimeOptions=&dynamicLayers=&gdbVersion=&mapScale=&rotation=&datumTransformations=&layerParameterValues=&mapRangeValues=&layerRangeValues=&f=image',
+	    map.addImage('pattern', image),
+	       
+	    map.addLayer({
             'id': 'canada',
             'type': 'fill',
             'source': 'canada',
             'layout': {},
-            'paint': {'fill-color': '#088','fill-opacity': 0.8}
-        });
+            'paint': {
+			'fill-pattern': 'pattern'
+        
+	});
     });
 </script>
 

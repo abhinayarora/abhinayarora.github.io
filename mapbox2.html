@@ -28,7 +28,7 @@
             map.getSource('canada').setData(url);
         }, 2000);
 
-        map.addSource('canada', { type: 'geojson', data: url });
+        map.addSource('canada', { type: 'pbf', data: url });
         map.addLayer({
             'id': 'canada',
             'type': 'fill',

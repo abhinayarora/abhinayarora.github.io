@@ -30,15 +30,7 @@
 
         map.addSource('canada', { type: 'geojson', data: url });
        
-	map.loadImage(
-'https://f0.pngfuel.com/png/164/786/planet-earth-artwork-png-clip-art-thumbnail.png',
-function(err, image) {
-// Throw an error if something went wrong
-if (err) throw err;
- 
-// Declare the image
-map.addImage('pattern', image);
- 
+	
 // Use it
 map.addLayer({
 'id': 'canada',
@@ -46,7 +38,7 @@ map.addLayer({
             'source': 'canada',
             'layout': {},
             'paint': {
-			'fill-pattern': 'pattern'
+		'fill-color': '#089','fill-opacity': 0.7
 			 }
 });
 	    

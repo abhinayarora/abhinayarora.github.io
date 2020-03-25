@@ -22,14 +22,14 @@
         zoom: 3,
         center: [-100.0, 55.0]
     });
-     var url2='https://geosavvy.duckdns.org/arcgis/rest/services/MyServices/CanadaOnAWS/MapServer/0/query?where=PRNAME+%3D+%27Yukon%27&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&having=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&historicMoment=&returnDistinctValues=false&resultOffset=&resultRecordCount=&queryByDistance=&returnExtentOnly=false&datumTransformation=&parameterValues=&rangeValues=&quantizationParameters=&featureEncoding=esriDefault&f=geojson';	
-    var url = 'https://geosavvy.duckdns.org/arcgis/rest/services/MyServices/CanadaOnAWS/MapServer/0/query?where=PRNAME+like+%27Ontario%27+or+PRNAME+like+%27Alberta%27+or+PRNAME+like+%27Manitoba%27&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&having=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&historicMoment=&returnDistinctValues=false&resultOffset=&resultRecordCount=&queryByDistance=&returnExtentOnly=false&datumTransformation=&parameterValues=&rangeValues=&quantizationParameters=&featureEncoding=esriDefault&f=geojson';
+     
+    var url = 'https://geosavvy.duckdns.org/arcgis/rest/services/MyServices/CanadaOnAWS/MapServer/0/query?where=PRENAME+like+%27Quebec%27+or+PRNAME+like+%27Alberta%27+or+PRNAME+like+%27Manitoba%27+or+PRNAME+like+%27Yukon%27+&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&having=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&historicMoment=&returnDistinctValues=false&resultOffset=&resultRecordCount=&queryByDistance=&returnExtentOnly=false&datumTransformation=&parameterValues=&rangeValues=&quantizationParameters=&featureEncoding=esriDefault&f=geojson';
     map.on('load', function() {
         window.setInterval(function() {
             map.getSource('canada').setData(url);
         }, 2000);
 
-        map.addSource('canada', { type: 'geojson', data: url },{ type: 'geojson', data: url2 });
+        map.addSource('canada', { type: 'geojson', data: url });
        
 	
 // Use it
